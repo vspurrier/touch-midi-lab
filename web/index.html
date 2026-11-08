@@ -19,6 +19,9 @@
       <label>Channel <input id="channel" type="number" min="1" max="16" value="1"></label>
       <label>Root <select id="root"><option value="48">C</option><option value="49">C♯</option><option value="50">D</option><option value="51">D♯</option><option value="52">E</option><option value="53">F</option><option value="54">F♯</option><option value="55">G</option><option value="56">G♯</option><option value="57">A</option><option value="58">A♯</option><option value="59">B</option></select></label>
       <label class="check-label"><input id="voice-leading" type="checkbox" checked> Voice leading</label>
+      <label>Octave <select id="octave"><option value="-2">-2</option><option value="-1">-1</option><option value="0" selected>0</option><option value="1">+1</option><option value="2">+2</option></select></label>
+      <label>Inversion <select id="inversion"><option value="0">Root</option><option value="1">1st</option><option value="2">2nd</option></select></label>
+      <label>Mode <select id="mode"><option value="play">Play</option><option value="strum">Strum</option><option value="lead">Lead</option></select></label>
       <button id="audio-toggle" class="secondary">Enable preview</button><button id="connect-midi" class="secondary">Connect MIDI</button><button id="panic" class="danger">All notes off</button>
     </section>
 
@@ -32,7 +35,7 @@
 
     <section class="monitor panel"><div class="section-title"><h2>Event monitor</h2><button id="clear-log" class="text-button">Clear</button></div><pre id="event-log">Ready. Enable preview or select a MIDI output.</pre></section>
   </main>
-  <script src="app.js?v=15"></script>
+  <script src="app.js?v=16"></script>
   <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});</script>
 </body>
 </html>
