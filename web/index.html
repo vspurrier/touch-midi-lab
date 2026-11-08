@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Touch MIDI Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div><p class="eyebrow">TOUCH MIDI LAB</p><h1>Chord Surface</h1></div>
+      <div class="status-row"><span id="audio-status" class="status">Audio off</span><span id="midi-status" class="status">MIDI unavailable</span></div>
+    </header>
+
+    <section class="controls panel">
+      <label>MIDI output <select id="midi-output"><option value="">No output selected</option></select></label>
+      <label>Channel <input id="channel" type="number" min="1" max="16" value="1"></label>
+      <label>Root <select id="root"><option value="48">C</option><option value="49">C♯</option><option value="50">D</option><option value="51">D♯</option><option value="52">E</option><option value="53">F</option><option value="54">F♯</option><option value="55">G</option><option value="56">G♯</option><option value="57">A</option><option value="58">A♯</option><option value="59">B</option></select></label>
+      <button id="audio-toggle" class="secondary">Enable preview</button><button id="panic" class="danger">All notes off</button>
+    </section>
+
+    <section class="instrument panel">
+      <div class="instrument-heading"><div><p class="eyebrow">HICHORD-INSPIRED</p><h2 id="chord-name">Choose a chord</h2></div><div id="joystick-readout">x 0.00 · y 0.00</div></div>
+      <div class="play-area">
+        <div class="chord-grid" id="chord-grid" aria-label="Chord buttons"></div>
+        <div class="joystick-wrap"><div id="joystick" class="joystick" aria-label="Chord modifier joystick"><div id="stick" class="stick"></div></div><p>Drag to modify</p></div>
+      </div>
+    </section>
+
+    <section class="monitor panel"><div class="section-title"><h2>Event monitor</h2><button id="clear-log" class="text-button">Clear</button></div><pre id="event-log">Ready. Enable preview or select a MIDI output.</pre></section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
