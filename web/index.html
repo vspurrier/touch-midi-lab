@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Touch MIDI Lab</title>
   <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
   <main class="app-shell">
@@ -36,14 +36,14 @@
     <section id="guide" class="guide panel" hidden>
       <div class="section-title"><div><p class="eyebrow">PLAYBOOK</p><h2>Progressions</h2></div><button id="guide-close" class="text-button">Back to instrument</button></div>
       <div class="progression-grid">
-        <article class="progression"><div class="degrees">I → V → vi → IV</div><p>V ↗ · vi ↙</p></article>
-        <article class="progression"><div class="degrees">vi → IV → I → V</div><p>vi ↙ · IV ↓</p></article>
-        <article class="progression"><div class="degrees">I → vi → IV → V</div><p>vi ↙ · V ↗</p></article>
-        <article class="progression"><div class="degrees">I → IV → V</div><p>IV ↓ · V ↗</p></article>
-        <article class="progression"><div class="degrees">I → vi → ii → V</div><p>ii → · V ↗</p></article>
-        <article class="progression"><div class="degrees">ii → V → I</div><p>ii → · V ↗</p></article>
-        <article class="progression"><div class="degrees">I → V → vi → iii → IV</div><p>vi ↙ · IV ↓</p></article>
-        <article class="progression"><div class="degrees">IV → V → vi → I</div><p>IV ↓ · vi ↙</p></article>
+        <article class="progression"><div class="progression-sequence"><span>I</span><i>→</i><span>V<small>↗</small></span><i>→</i><span>vi<small>↙</small></span><i>→</i><span>IV</span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>vi<small>↙</small></span><i>→</i><span>IV<small>↓</small></span><i>→</i><span>I</span><i>→</i><span>V</span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>I</span><i>→</i><span>vi<small>↙</small></span><i>→</i><span>IV</span><i>→</i><span>V<small>↗</small></span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>I</span><i>→</i><span>IV<small>↓</small></span><i>→</i><span>V<small>↗</small></span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>I</span><i>→</i><span>vi</span><i>→</i><span>ii<small>→</small></span><i>→</i><span>V<small>↗</small></span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>ii<small>→</small></span><i>→</i><span>V<small>↗</small></span><i>→</i><span>I</span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>I</span><i>→</i><span>V</span><i>→</i><span>vi<small>↙</small></span><i>→</i><span>iii</span><i>→</i><span>IV<small>↓</small></span></div></article>
+        <article class="progression"><div class="progression-sequence"><span>IV<small>↓</small></span><i>→</i><span>V</span><i>→</i><span>vi<small>↙</small></span><i>→</i><span>I</span></div></article>
       </div>
       <div class="palette-heading"><p class="eyebrow">DEFAULT JOYSTICK MODE</p><h2>Color palette</h2></div>
       <div class="palette-wheel"><span class="palette-center">Base</span><div class="palette-point point-nw"><b>↖</b><strong>Aug</strong></div><div class="palette-point point-n"><b>↑</b><strong>Maj / Min</strong></div><div class="palette-point point-ne"><b>↗</b><strong>Dom7</strong></div><div class="palette-point point-w"><b>←</b><strong>Dim</strong></div><div class="palette-point point-e"><b>→</b><strong>Maj7</strong></div><div class="palette-point point-sw"><b>↙</b><strong>6th / Sus2</strong></div><div class="palette-point point-s"><b>↓</b><strong>Sus4</strong></div><div class="palette-point point-se"><b>↘</b><strong>9th</strong></div></div>
