@@ -1,5 +1,5 @@
 const chordDefs=[['I','Major',[0,4,7]],['ii','Minor',[2,5,9]],['iii','Minor',[4,7,11]],['IV','Major',[5,9,12]],['V','Major',[7,11,14]],['vi','Minor',[9,12,16]],['vii°','Diminished',[11,14,17]]];
-const $=id=>document.getElementById(id);let midi=null,output=null,active=null,activeIndex=null,audio=null,oscillators=new Map(),lastXY={x:0,y:0},pendingVariant='base',currentVariant='base';
+const $=id=>document.getElementById(id);let midi=null,output=null,midiStarting=false,active=null,activeIndex=null,audio=null,oscillators=new Map(),lastXY={x:0,y:0},pendingVariant='base',currentVariant='base';
 function log(message){const time=new Date().toLocaleTimeString();$('event-log').textContent=`${time}  ${message}\n`+$('event-log').textContent.split('\n').slice(0,18).join('\n')}
 function channel(){return Math.min(16,Math.max(1,Number($('channel').value)||1))-1} function send(data){if(output)output.send(data);log(`MIDI ${data.map(n=>n.toString(16).padStart(2,'0')).join(' ')}`)}
 function noteOn(note,velocity=100){send([0x90|channel(),note,velocity]); if(audio){const o=audio.createOscillator(),g=audio.createGain();o.type='square';o.frequency.value=440*Math.pow(2,(note-69)/12);g.gain.setValueAtTime(.0001,audio.currentTime);g.gain.exponentialRampToValueAtTime(.08,audio.currentTime+.01);o.connect(g).connect(audio.destination);o.start();oscillators.set(note,{o,g})}}
@@ -16,7 +16,9 @@ function resetJoystick(){lastXY={x:0,y:0};$('stick').style.transform='translate(
 function setupJoystick(){let dragging=false;const j=$('joystick');j.addEventListener('pointerdown',e=>{dragging=true;j.setPointerCapture(e.pointerId);updateJoystick(e)});j.addEventListener('pointermove',e=>{if(dragging)updateJoystick(e)});['pointerup','pointercancel'].forEach(type=>j.addEventListener(type,()=>{dragging=false;pendingVariant='base';currentVariant='base';if(activeIndex!==null)replaceNotes(notesFor(activeIndex,'base'));resetJoystick()}))}
 async function toggleAudio(){if(!audio)audio=new AudioContext();await audio.resume();$('audio-status').textContent='Audio ready';$('audio-status').classList.add('live');$('audio-toggle').textContent='Preview enabled';log('Audio preview enabled')}
 async function setupMIDI(){
-  if(!navigator.requestMIDIAccess){$('midi-status').textContent='MIDI unsupported';log(`Web MIDI unavailable (${location.protocol}, ${window.matchMedia('(display-mode: standalone)').matches?'standalone PWA':'browser'})`);return}
+  if(midiStarting)return;
+  midiStarting=true;
+  if(!navigator.requestMIDIAccess){midiStarting=false;$('midi-status').textContent='MIDI unsupported';log(`Web MIDI unavailable (${location.protocol}, ${window.matchMedia('(display-mode: standalone)').matches?'standalone PWA':'browser'})`);return}
   try{
     midi=await navigator.requestMIDIAccess();
     const refresh=()=>{
@@ -33,7 +35,8 @@ async function setupMIDI(){
       output=midi.outputs.get(e.target.value)||null;
       if(output){localStorage.setItem('touch-midi-output',output.id);log(`Selected MIDI output: ${output.name}`);}
     };
-  }catch(e){$('midi-status').textContent='MIDI blocked';log(`MIDI permission failed: ${e.name}: ${e.message}`)}
+    midiStarting=false;
+  }catch(e){midiStarting=false;$('midi-status').textContent='MIDI blocked';log(`MIDI permission failed: ${e.name}: ${e.message}`)}
 }
 function panic(){if(active)release();for(const n of oscillators.keys())noteOff(n);send([0xb0|channel(),123,0]);log('Panic: all notes off')}
-$('audio-toggle').onclick=toggleAudio;$('connect-midi').onclick=setupMIDI;$('panic').onclick=panic;$('clear-log').onclick=()=>$('event-log').textContent='Ready.';window.addEventListener('blur',release);window.addEventListener('keydown',e=>{if(e.repeat)return;const i='asdfjkl'.indexOf(e.key.toLowerCase());if(i>=0)playChord(i)});window.addEventListener('keyup',e=>{if('asdfjkl'.includes(e.key.toLowerCase()))release()});setupChords();setupJoystick();
+$('audio-toggle').onclick=toggleAudio;$('connect-midi').onclick=setupMIDI;$('panic').onclick=panic;$('clear-log').onclick=()=>$('event-log').textContent='Ready.';window.addEventListener('blur',release);window.addEventListener('keydown',e=>{if(e.repeat)return;const i='asdfjkl'.indexOf(e.key.toLowerCase());if(i>=0)playChord(i)});window.addEventListener('keyup',e=>{if('asdfjkl'.includes(e.key.toLowerCase()))release()});setupChords();setupJoystick();if(localStorage.getItem('touch-midi-output'))setupMIDI();
