@@ -1,5 +1,8 @@
-import { createPerformanceBus } from './core/performance.js';
-import { hichordProfile } from './instruments/hichord.js';
+// The host is intentionally kept behaviorally identical during this first
+// migration. Its DOM-heavy cleanup can happen alongside the next profile.
+// @ts-nocheck
+import { createPerformanceBus } from './core/performance';
+import { hichordProfile } from './instruments/hichord';
 const chordDefs = hichordProfile.chordDefs;
 const qualityNotes = (index, variant) => hichordProfile.qualityNotes(index, variant);
 const joystickVariant = (x, y) => hichordProfile.joystickVariant(x, y);

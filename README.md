@@ -16,13 +16,20 @@ The app deliberately does not reproduce HiChord's sound engine. Koala Sampler is
 
 ## Run it
 
-From this directory, serve the files over HTTP:
+Install dependencies and build the site:
 
 ```sh
-python3 -m http.server 4173 -d web
+npm install
+npm run build
 ```
 
-Then open <http://localhost:4173>. Web MIDI generally requires HTTPS or localhost and a browser with Web MIDI support. The local audio preview works without MIDI hardware.
+For local development, serve the source site with Vite:
+
+```sh
+npx vite --host 0.0.0.0
+```
+
+Then open the URL Vite prints. Web MIDI generally requires HTTPS or localhost and a browser with Web MIDI support. The local audio preview works without MIDI hardware.
 
 ## Direction
 

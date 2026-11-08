@@ -8,7 +8,7 @@ Create a collection of touch-friendly software emulations of unusual musical har
 
 - No HiChord audio engine
 - No accounts, cloud service, backend, or database
-- No framework unless the interaction prototype demonstrates a need
+- Minimal Vite/TypeScript build; no UI framework is required
 - Local square-wave audio is for debugging only
 - MIDI output is experimental and should fail gracefully when unavailable
 
@@ -27,6 +27,8 @@ local preview synth    MIDI output adapter
 ```
 
 The UI should produce semantic events such as `chordPressed`, `chordReleased`, and `joystickMoved`. MIDI encoding and audio preview should remain separate so either can be replaced later.
+
+Instrument-specific behavior belongs in a profile under `web/instruments/`. Shared performance events belong in `web/core/`, allowing new surfaces to reuse the MIDI and preview infrastructure.
 
 ## Delivery path
 

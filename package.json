@@ -1,0 +1,7 @@
+{
+  "name": "touch-midi-lab",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "vite build", "typecheck": "tsc --noEmit" },
+  "devDependencies": { "typescript": "^5.7.2", "vite": "^6.0.5" }
+}
