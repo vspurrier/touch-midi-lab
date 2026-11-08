@@ -2,6 +2,7 @@
   "name": "Touch MIDI Lab",
   "short_name": "MIDI Lab",
   "description": "Touch-first MIDI control surfaces.",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
