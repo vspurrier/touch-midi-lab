@@ -16,7 +16,7 @@ function resetJoystick(){lastXY={x:0,y:0};$('stick').style.transform='translate(
 function setupJoystick(){let dragging=false;const j=$('joystick');j.addEventListener('pointerdown',e=>{dragging=true;j.setPointerCapture(e.pointerId);updateJoystick(e)});j.addEventListener('pointermove',e=>{if(dragging)updateJoystick(e)});['pointerup','pointercancel'].forEach(type=>j.addEventListener(type,()=>{dragging=false;pendingVariant='base';currentVariant='base';if(activeIndex!==null)replaceNotes(notesFor(activeIndex,'base'));resetJoystick()}))}
 async function toggleAudio(){if(!audio)audio=new AudioContext();await audio.resume();$('audio-status').textContent='Audio ready';$('audio-status').classList.add('live');$('audio-toggle').textContent='Preview enabled';log('Audio preview enabled')}
 async function setupMIDI(){
-  if(!navigator.requestMIDIAccess){log('Web MIDI is not available in this browser');return}
+  if(!navigator.requestMIDIAccess){$('midi-status').textContent='MIDI unsupported';log(`Web MIDI unavailable (${location.protocol}, ${window.matchMedia('(display-mode: standalone)').matches?'standalone PWA':'browser'})`);return}
   try{
     midi=await navigator.requestMIDIAccess();
     const refresh=()=>{
@@ -33,7 +33,7 @@ async function setupMIDI(){
       output=midi.outputs.get(e.target.value)||null;
       if(output){localStorage.setItem('touch-midi-output',output.id);log(`Selected MIDI output: ${output.name}`);}
     };
-  }catch(e){log(`MIDI permission failed: ${e.message}`)}
+  }catch(e){$('midi-status').textContent='MIDI blocked';log(`MIDI permission failed: ${e.name}: ${e.message}`)}
 }
 function panic(){if(active)release();for(const n of oscillators.keys())noteOff(n);send([0xb0|channel(),123,0]);log('Panic: all notes off')}
-$('audio-toggle').onclick=toggleAudio;$('panic').onclick=panic;$('clear-log').onclick=()=>$('event-log').textContent='Ready.';window.addEventListener('blur',release);window.addEventListener('keydown',e=>{if(e.repeat)return;const i='asdfjkl'.indexOf(e.key.toLowerCase());if(i>=0)playChord(i)});window.addEventListener('keyup',e=>{if('asdfjkl'.includes(e.key.toLowerCase()))release()});setupChords();setupJoystick();setupMIDI();
+$('audio-toggle').onclick=toggleAudio;$('connect-midi').onclick=setupMIDI;$('panic').onclick=panic;$('clear-log').onclick=()=>$('event-log').textContent='Ready.';window.addEventListener('blur',release);window.addEventListener('keydown',e=>{if(e.repeat)return;const i='asdfjkl'.indexOf(e.key.toLowerCase());if(i>=0)playChord(i)});window.addEventListener('keyup',e=>{if('asdfjkl'.includes(e.key.toLowerCase()))release()});setupChords();setupJoystick();setupMIDI();
