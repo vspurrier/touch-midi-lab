@@ -1,0 +1,12 @@
+{
+  "name": "Touch MIDI Lab",
+  "short_name": "MIDI Lab",
+  "description": "Touch-first MIDI control surfaces.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#151514",
+  "theme_color": "#151514",
+  "icons": []
+}
