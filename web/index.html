@@ -16,6 +16,7 @@
 
     <section class="controls panel">
       <label>MIDI output <select id="midi-output"><option value="">No output selected</option></select></label>
+      <label>Instrument <select id="instrument-select"><option value="hichord">HiChord</option><option value="omnichord">Omnichord</option></select></label>
       <label>Channel <input id="channel" type="number" min="1" max="16" value="1"></label>
       <label>Root <select id="root"><option value="48">C</option><option value="49">C♯</option><option value="50">D</option><option value="51">D♯</option><option value="52">E</option><option value="53">F</option><option value="54">F♯</option><option value="55">G</option><option value="56">G♯</option><option value="57">A</option><option value="58">A♯</option><option value="59">B</option></select></label>
       <button id="voice-leading" class="secondary" type="button">Voice leading: On</button>
@@ -26,10 +27,11 @@
     </section>
 
     <section id="instrument" class="instrument panel">
-      <div class="instrument-heading"><div><p class="eyebrow">HICHORD-INSPIRED</p><h2 id="chord-name">Choose a chord</h2></div><div id="joystick-readout">x 0.00 · y 0.00</div></div>
+      <div id="instrument-heading" class="instrument-heading"><div><p class="eyebrow">HICHORD-INSPIRED</p><h2 id="chord-name">Choose a chord</h2></div><div id="joystick-readout">x 0.00 · y 0.00</div></div>
       <div class="play-area">
         <div class="chord-grid" id="chord-grid" aria-label="Chord buttons"></div>
         <div class="joystick-wrap"><div id="joystick" class="joystick" aria-label="Chord modifier joystick"><span class="joystick-tick tick-nw"></span><span class="joystick-tick tick-n"></span><span class="joystick-tick tick-ne"></span><span class="joystick-tick tick-w"></span><span class="joystick-tick tick-e"></span><span class="joystick-tick tick-sw"></span><span class="joystick-tick tick-s"></span><span class="joystick-tick tick-se"></span><span class="joystick-center"></span><div id="stick" class="stick"></div></div><p>Hold a chord, then drag</p></div>
+        <div id="strumplate" class="strumplate" hidden aria-label="Omnichord strumplate"><div class="strumplate-lines"></div><p>Tap or slide to strum</p></div>
       </div>
     </section>
 
