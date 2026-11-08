@@ -22,10 +22,10 @@
       <label>Octave <select id="octave"><option value="-2">-2</option><option value="-1">-1</option><option value="0" selected>0</option><option value="1">+1</option><option value="2">+2</option></select></label>
       <label>Inversion <select id="inversion"><option value="0">Root</option><option value="1">1st</option><option value="2">2nd</option></select></label>
       <label>Mode <select id="mode"><option value="play">Play</option><option value="strum">Strum</option><option value="lead">Lead</option></select></label>
-      <button id="audio-toggle" class="secondary">Enable preview</button><button id="connect-midi" class="secondary">Connect MIDI</button><button id="panic" class="danger">All notes off</button>
+      <button id="audio-toggle" class="secondary">Enable preview</button><button id="connect-midi" class="secondary">Connect MIDI</button><button id="guide-toggle" class="secondary">Guide</button><button id="panic" class="danger">All notes off</button>
     </section>
 
-    <section class="instrument panel">
+    <section id="instrument" class="instrument panel">
       <div class="instrument-heading"><div><p class="eyebrow">HICHORD-INSPIRED</p><h2 id="chord-name">Choose a chord</h2></div><div id="joystick-readout">x 0.00 · y 0.00</div></div>
       <div class="play-area">
         <div class="chord-grid" id="chord-grid" aria-label="Chord buttons"></div>
@@ -33,9 +33,25 @@
       </div>
     </section>
 
+    <section id="guide" class="guide panel" hidden>
+      <div class="section-title"><div><p class="eyebrow">PLAYBOOK</p><h2>Progressions</h2></div><button id="guide-close" class="text-button">Back to instrument</button></div>
+      <div class="progression-grid">
+        <article class="progression"><h3>I–V–vi–IV</h3><div class="degrees">1 → 5 → 6 → 4</div><p>Try: 5 ↗ · 6 ↙</p></article>
+        <article class="progression"><h3>vi–IV–I–V</h3><div class="degrees">6 → 4 → 1 → 5</div><p>Try: 6 ↙ · 4 ↓</p></article>
+        <article class="progression"><h3>I–vi–IV–V</h3><div class="degrees">1 → 6 → 4 → 5</div><p>Try: 6 ↙ · 5 ↗</p></article>
+        <article class="progression"><h3>I–IV–V</h3><div class="degrees">1 → 4 → 5</div><p>Try: 4 ↓ · 5 ↗</p></article>
+        <article class="progression"><h3>I–vi–ii–V</h3><div class="degrees">1 → 6 → 2 → 5</div><p>Try: 2 → · 5 ↗</p></article>
+        <article class="progression"><h3>ii–V–I</h3><div class="degrees">2 → 5 → 1</div><p>Try: 2 → · 5 ↗</p></article>
+        <article class="progression"><h3>I–V–vi–iii–IV</h3><div class="degrees">1 → 5 → 6 → 3 → 4</div><p>Try: 6 ↙ · 4 ↓</p></article>
+        <article class="progression"><h3>IV–V–vi–I</h3><div class="degrees">4 → 5 → 6 → 1</div><p>Try: 4 ↓ · 6 ↙</p></article>
+      </div>
+      <div class="palette-heading"><p class="eyebrow">DEFAULT JOYSTICK MODE</p><h2>Color palette</h2></div>
+      <div class="palette-grid"><div><span>↖</span><strong>Augmented</strong><small>dreamy / floating</small></div><div><span>↑</span><strong>Major ↔ minor</strong><small>bright ↔ dark</small></div><div><span>↗</span><strong>Dominant 7th</strong><small>bluesy / tense</small></div><div><span>→</span><strong>Maj7 / min7</strong><small>jazzy / smooth</small></div><div><span>↘</span><strong>9th</strong><small>lush / modern</small></div><div><span>↓</span><strong>Sus4</strong><small>open / unresolved</small></div><div><span>↙</span><strong>6th / Sus2</strong><small>sweet / nostalgic</small></div><div><span>←</span><strong>Diminished / minor</strong><small>dark / tense</small></div></div>
+    </section>
+
     <section class="monitor panel"><div class="section-title"><h2>Event monitor</h2><button id="clear-log" class="text-button">Clear</button></div><pre id="event-log">Ready. Enable preview or select a MIDI output.</pre></section>
   </main>
-  <script src="app.js?v=23"></script>
+  <script src="app.js?v=24"></script>
   <script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});</script>
 </body>
 </html>
