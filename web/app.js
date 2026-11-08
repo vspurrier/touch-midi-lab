@@ -24,12 +24,14 @@ async function setupMIDI(){
       select.innerHTML='<option value="">No output selected</option>';
       [...midi.outputs.values()].forEach(o=>select.add(new Option(o.name,o.id)));
       $('midi-status').textContent=`${midi.outputs.size} MIDI output${midi.outputs.size===1?'':'s'}`;
+      const savedId=localStorage.getItem('touch-midi-output');
+      if(savedId&&midi.outputs.has(savedId)){select.value=savedId;output=midi.outputs.get(savedId);}
     };
     midi.onstatechange=refresh;
     refresh();
     $('midi-output').onchange=e=>{
       output=midi.outputs.get(e.target.value)||null;
-      if(output)log(`Selected MIDI output: ${output.name}`);
+      if(output){localStorage.setItem('touch-midi-output',output.id);log(`Selected MIDI output: ${output.name}`);}
     };
   }catch(e){log(`MIDI permission failed: ${e.message}`)}
 }
