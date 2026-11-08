@@ -13,3 +13,4 @@
 .progression-origin{display:block;text-align:center;color:var(--muted);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
 .palette-point b{font-size:1.8rem}.palette-point strong{font-size:.9rem}.palette-point small{font-size:.72rem}.point-nw{left:27%;top:27%}.point-n{left:50%;top:15%}.point-ne{left:73%;top:27%}.point-w{left:15%;top:50%}.point-e{left:85%;top:50%}.point-sw{left:27%;top:73%}.point-s{left:50%;top:85%}.point-se{left:73%;top:73%}
 .progression-sequence>i{font-size:0}.progression-sequence>i::after{content:'›';font-size:1rem;color:#777268}
+.toggle-active{background:var(--accent);color:#1a150e}
